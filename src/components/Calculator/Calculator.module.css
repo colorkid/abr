@@ -1,0 +1,22 @@
+.calculator {
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 600px;
+    padding: 20px 30px;
+    background-color: #fff;
+}
+
+.calculator__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+@media screen and (max-width: 768px) {
+    .calculator {
+        max-width: 100%;
+        height: 100vh;
+        padding: 10px 15px;
+    }
+}

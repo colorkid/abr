@@ -1,5 +1,5 @@
 import { useSelector } from 'react-redux';
-import { createIncomeResultAmount, getNoun } from '../helpers';
+import { createIncomeResultAmount, getDataFromArray, getNoun, numberWithSpace } from '../helpers';
 import pdfMake from 'pdfmake/build/pdfmake';
 import vfsFonts from 'pdfmake/build/vfs_fonts';
 
@@ -15,7 +15,7 @@ export const usePdfResult = () => {
     const currentAmount = useSelector((state) => state.calculator.currentAmount);
     const depositSelectList = useSelector((state) => state.calculator.depositSelectList);
 
-    const nameDeposit = depositSelectList.filter((item) => item.value === currentCode)[0]?.name;
+    const nameDeposit = getDataFromArray(depositSelectList, 'value', currentCode, 'label');
 
     const resultSums = createIncomeResultAmount(currentAmount, currentRate);
 
@@ -27,20 +27,21 @@ export const usePdfResult = () => {
                 style: 'row',
             },
             { text: `Процентная ставка: ${currentRate} %.`, style: 'row' },
-            { text: `Сумма вклада: ${currentAmount} рублей.`, style: 'row' },
+            { text: `Сумма вклада: ${numberWithSpace(currentAmount)} рублей.`, style: 'row' },
             {
-                text: `Сумма через ${currentTerm} ${getNoun(currentTerm, ...NOUNS_DAY)}: ${
-                    resultSums.resultAmount
-                } рублей.`,
+                text: `Сумма через ${currentTerm} ${getNoun(
+                    currentTerm,
+                    ...NOUNS_DAY
+                )}: ${numberWithSpace(resultSums.resultAmount)} рублей.`,
                 style: 'row',
             },
-            { text: `Доход: ${resultSums.income} рублей.`, style: 'row' },
+            { text: `Доход: ${numberWithSpace(resultSums.income)} рублей.`, style: 'row' },
         ],
 
         styles: {
-            header: {
-                fontSize: 22,
-                bold: true,
+            row: {
+                fontSize: 16,
+                marginTop: 5,
             },
         },
     };

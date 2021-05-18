@@ -2,6 +2,7 @@ import React, { useEffect, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Calculator from './Calculator';
 import { fetchDeposits } from '../../redux/thunks';
+import { getDataFromArray } from '../../helpers';
 
 const CalculatorContainer = () => {
     const deposits = useSelector((state) => state.calculator.deposits);
@@ -9,12 +10,16 @@ const CalculatorContainer = () => {
     const currentTerm = useSelector((state) => state.calculator.currentTerm);
 
     const currentParams = useMemo(
-        () => deposits.filter((item) => item.code === currentCode)[0]?.param,
+        () => getDataFromArray(deposits, 'code', currentCode, 'param'),
         [currentCode]
     );
 
-    const currentSummsRate = currentParams?.filter((item) => item.period_from === currentTerm)[0]
-        ?.summs_and_rate;
+    const currentSummsRate = getDataFromArray(
+        currentParams,
+        'period_from',
+        currentTerm,
+        'summs_and_rate'
+    );
 
     const dispatch = useDispatch();
 

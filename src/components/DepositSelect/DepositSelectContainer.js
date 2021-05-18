@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setCurrentCode } from '../../redux/calculatorSlice';
 
 const DepositSelectContainer = () => {
+    const currentCode = useSelector((state) => state.calculator.currentCode);
     const depositSelectList = useSelector((state) => state.calculator.depositSelectList);
     const dispatch = useDispatch();
 
@@ -19,6 +20,7 @@ const DepositSelectContainer = () => {
 
     return (
         <DepositSelect
+            currentCode={currentCode}
             depositTypeList={depositSelectList}
             dispatchCurrentDeposit={dispatchCurrentDeposit}
         />

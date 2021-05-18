@@ -19,9 +19,16 @@ export const createIncomeResultAmount = (currentAmount, currentRate) => {
     const income = (currentAmount / 100) * currentRate;
     const resultAmount = currentAmount + income;
 
-    return { income, resultAmount };
+    return { income: Math.round(income), resultAmount: Math.round(resultAmount) };
 };
 
 export const numberWithSpace = (x) => {
-    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+    return x?.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+};
+
+export const getDataFromArray = (arr, key, target, valueName) => {
+    if (valueName) {
+        return arr?.filter((item) => item[key] === target)[0]?.[valueName];
+    }
+    return arr?.filter((item) => item[key] === target)[0];
 };

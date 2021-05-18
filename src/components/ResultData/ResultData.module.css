@@ -1,0 +1,18 @@
+.resultData {
+    width: 100%;
+}
+
+.resultData__row {
+    display: flex;
+    justify-content: space-between;
+}
+
+@media screen and (max-width: 768px) {
+    .resultData {
+        margin-top: 20px;
+    }
+
+    .resultData__row {
+        flex-wrap: wrap;
+    }
+}

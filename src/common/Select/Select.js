@@ -1,26 +1,35 @@
 import React from 'react';
+import Select from 'react-select';
 import Skeleton from '../Skeleton';
+import styles from './Select.module.css';
+import { customStyles } from './customStyle';
+import { getDataFromArray } from '../../helpers';
 
-const Select = ({ list, onChange }) => {
+const SelectEl = ({ list, onChange, currentCode }) => {
     const onChangeHandler = (e) => {
-        onChange(e.target.value);
+        onChange(e.value);
     };
 
+    const defaultValue = getDataFromArray(list, 'value', currentCode);
+
     return (
-        <>
-            {!!list.length ? (
-                <select onChange={onChangeHandler}>
-                    {list.map((item) => (
-                        <option key={item.value} value={item.value}>
-                            {item.name}
-                        </option>
-                    ))}
-                </select>
+        <div className={styles.selectWrapper}>
+            {!!list.length && defaultValue ? (
+                <div className={styles.select}>
+                    <Select
+                        styles={customStyles}
+                        className={styles.select__tag}
+                        defaultValue={defaultValue}
+                        onChange={onChangeHandler}
+                        options={list}
+                        isSearchable={false}
+                    />
+                </div>
             ) : (
                 <Skeleton />
             )}
-        </>
+        </div>
     );
 };
 
-export default Select;
+export default SelectEl;

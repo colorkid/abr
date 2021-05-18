@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import Range from './Range';
 
-const RangeContainer = ({ values = [], nouns, onChange }) => {
+const RangeContainer = ({ values = [], nouns, onChange, label }) => {
     const [currentStepIndex, setCurrentStepIndex] = useState(0);
 
     const handleInputChange = (e) => {
-        setCurrentStepIndex(Number(e.currentTarget.value));
-        onChange(Number(e.currentTarget.value));
+        setCurrentStepIndex(e);
+        onChange(e);
     };
 
     useEffect(() => {
@@ -19,6 +19,7 @@ const RangeContainer = ({ values = [], nouns, onChange }) => {
             nouns={nouns}
             handleInputChange={handleInputChange}
             currentStepIndex={currentStepIndex}
+            label={label}
         />
     );
 };

@@ -1,0 +1,13 @@
+@font-face {
+    font-family: 'PFDinTextPro-Regular';
+    font-style: normal;
+    font-weight: normal;
+    src: local('PFDinTextPro-Regular'), url('PFDinTextPro-Regular.woff') format('woff');
+}
+
+@font-face {
+    font-family: 'PFDinTextPro-Bold';
+    font-style: normal;
+    font-weight: 600;
+    src: local('PFDinTextPro-Bold'), url('PFDinTextPro-Bold.woff') format('woff');
+}
