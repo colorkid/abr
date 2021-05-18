@@ -1,13 +1,13 @@
-import React, { useEffect, useMemo } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React, { FC, useEffect, useMemo } from 'react';
 import Calculator from './Calculator';
-import { fetchDeposits } from '../../redux/thunks';
 import { getDataFromArray } from '../../helpers';
+import { fetchDeposits } from '../../redux/calculatorSlice';
+import { useAppDispatch, useAppSelector } from '../../redux/store';
 
-const CalculatorContainer = () => {
-    const deposits = useSelector((state) => state.calculator.deposits);
-    const currentCode = useSelector((state) => state.calculator.currentCode);
-    const currentTerm = useSelector((state) => state.calculator.currentTerm);
+const CalculatorContainer: FC = () => {
+    const deposits = useAppSelector((state) => state.calculator.deposits);
+    const currentCode = useAppSelector((state) => state.calculator.currentCode);
+    const currentTerm = useAppSelector((state) => state.calculator.currentTerm);
 
     const currentParams = useMemo(
         () => getDataFromArray(deposits, 'code', currentCode, 'param'),
@@ -21,11 +21,11 @@ const CalculatorContainer = () => {
         'summs_and_rate'
     );
 
-    const dispatch = useDispatch();
+    const dispatch = useAppDispatch();
 
     useEffect(() => {
         dispatch(fetchDeposits());
-    }, []);
+    }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     return <Calculator currentParams={currentParams} currentSummsRate={currentSummsRate} />;
 };

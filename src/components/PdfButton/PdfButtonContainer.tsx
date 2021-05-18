@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { FC } from 'react';
 import PdfButton from './PdfButton';
 import { usePdfResult } from '../../hocs/usePdfResult';
 
-const PdfButtonContainer = () => {
+const PdfButtonContainer: FC = () => {
     const downloadPdf = usePdfResult();
 
     const downLoad = () => {

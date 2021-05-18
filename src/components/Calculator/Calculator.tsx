@@ -1,12 +1,18 @@
-import React from 'react';
+import React, { FC } from 'react';
 import DepositSelect from '../DepositSelect';
 import DepositTerm from '../DepositTerm';
 import DepositAmount from '../DepositAmount';
 import ResultData from '../ResultData';
 import styles from './Calculator.module.css';
 import PdfButton from '../PdfButton/PdfButtonContainer';
+import { DataFromArrayType } from '../../types';
 
-const Calculator = ({ currentParams, currentSummsRate }) => {
+type CalculatorType = {
+    currentParams: DataFromArrayType;
+    currentSummsRate: DataFromArrayType;
+};
+
+const Calculator: FC<CalculatorType> = ({ currentParams, currentSummsRate }) => {
     return (
         <div className={styles.calculator}>
             <header className={styles.calculator__header}>

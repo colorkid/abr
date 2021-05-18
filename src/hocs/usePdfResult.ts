@@ -1,19 +1,20 @@
-import { useSelector } from 'react-redux';
 import { createIncomeResultAmount, getDataFromArray, getNoun, numberWithSpace } from '../helpers';
 import pdfMake from 'pdfmake/build/pdfmake';
 import vfsFonts from 'pdfmake/build/vfs_fonts';
+import { NounsType } from '../types';
+import {useAppSelector} from "../redux/store";
 
 const { vfs } = vfsFonts.pdfMake;
 pdfMake.vfs = vfs;
 
-const NOUNS_DAY = ['день', 'дня', 'дней'];
+const NOUNS_DAY: NounsType = ['день', 'дня', 'дней'];
 
-export const usePdfResult = () => {
-    const currentCode = useSelector((state) => state.calculator.currentCode);
-    const currentTerm = useSelector((state) => state.calculator.currentTerm);
-    const currentRate = useSelector((state) => state.calculator.currentRate);
-    const currentAmount = useSelector((state) => state.calculator.currentAmount);
-    const depositSelectList = useSelector((state) => state.calculator.depositSelectList);
+export const usePdfResult = (): void => {
+    const currentCode = useAppSelector((state) => state.calculator.currentCode);
+    const currentTerm = useAppSelector((state) => state.calculator.currentTerm);
+    const currentRate = useAppSelector((state) => state.calculator.currentRate);
+    const currentAmount = useAppSelector((state) => state.calculator.currentAmount);
+    const depositSelectList = useAppSelector((state) => state.calculator.depositSelectList);
 
     const nameDeposit = getDataFromArray(depositSelectList, 'value', currentCode, 'label');
 
