@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
-import Skeleton from '../../../../common/Skeleton';
 import { numberWithSpace } from '../../../../helpers';
 import styles from './ResultItem.module.css';
+import Skeleton from '../../../../common/Skeleton';
 
 type ResultItemType = {
     result: number;

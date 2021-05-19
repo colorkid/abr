@@ -1,1 +1,1 @@
-export { default } from './RangeContainer';
+export { default } from './Range';

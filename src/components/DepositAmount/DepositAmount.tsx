@@ -5,13 +5,30 @@ const NOUNS_RUB = ['рубль', 'рубля', 'рублей', 'рубля'];
 const LABEL_TXT = 'Сумма вклада';
 
 type DepositAmountType = {
-    period: number[];
     dispatchCurrentTerm: (value: number) => void;
+    step: number;
+    currentAmount: number;
+    min: number;
+    max: number;
 };
 
-const DepositAmount: FC<DepositAmountType> = ({ period, dispatchCurrentTerm }) => {
+const DepositAmount: FC<DepositAmountType> = ({
+    dispatchCurrentTerm,
+    currentAmount,
+    min,
+    max,
+    step
+}) => {
     return (
-        <Range values={period} nouns={NOUNS_RUB} onChange={dispatchCurrentTerm} label={LABEL_TXT} />
+        <Range
+            min={min}
+            max={max}
+            step={step}
+            value={currentAmount}
+            nouns={NOUNS_RUB}
+            onChange={dispatchCurrentTerm}
+            label={LABEL_TXT}
+        />
     );
 };
 

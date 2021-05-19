@@ -7,30 +7,28 @@ import Skeleton from '../../common/Skeleton';
 const NOUNS_DAY = ['день', 'дня', 'дней'];
 
 type ResultDataType = {
-    currentRate: number;
+    rate: number;
     currentTerm: number;
     resultAmount: number;
     income: number;
 };
 
-const ResultData: FC<ResultDataType> = ({ currentRate, currentTerm, resultAmount, income }) => {
-    const isSomeReady = currentRate || currentTerm || income;
-
+const ResultData: FC<ResultDataType> = ({ rate, currentTerm, resultAmount, income }) => {
     return (
         <div className={styles.resultData}>
-            {isSomeReady ? (
-                <div className={styles.resultData__row}>
-                    <ResultItem result={currentRate} label="Процентная ставка" type="%" />
+            <div className={styles.resultData__row}>
+
+                    <ResultItem result={rate} label="Процентная ставка" type="%" />
+
+
                     <ResultItem
                         result={resultAmount}
                         label={`Сумма через ${currentTerm} ${getNoun(currentTerm, NOUNS_DAY)}`}
                         type="р."
                     />
-                    <ResultItem result={income} label="Доход" type="р." />
-                </div>
-            ) : (
-                <Skeleton />
-            )}
+
+                {!!income ? <ResultItem result={income} label="Доход" type="р." /> :  <Skeleton />}
+            </div>
         </div>
     );
 };

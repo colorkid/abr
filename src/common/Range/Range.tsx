@@ -1,50 +1,32 @@
 import React, { FC } from 'react';
 import Slider from 'rc-slider';
 import RangeLabel from './Components/RangeLabel';
-import Skeleton from '../Skeleton';
 import styles from './Range.module.css';
 import './Range.css';
 import { NounsType } from '../../types';
 
 type RangeType = {
-    values: number[];
     nouns: NounsType;
-    currentStepIndex: number;
-    handleInputChange: (e: number) => void;
+    value: number;
+    onChange: (e: number) => void;
     label: string;
+    min: number;
+    max: number;
+    step: number;
 };
 
-const Range: FC<RangeType> = ({
-    values = [],
-    nouns,
-    handleInputChange,
-    currentStepIndex,
-    label,
-}) => {
+const Range: FC<RangeType> = ({ nouns, onChange, value, label, max, min, step }) => {
     return (
         <div className={styles.range}>
-            {values.length ? (
-                <div>
-                    <div className={styles.range__top}>
-                        <div>{label}</div>
-                        <span id="output" className={styles.range__result}>
-                            <RangeLabel
-                                values={values}
-                                currentStepIndex={currentStepIndex}
-                                nouns={nouns}
-                            />
-                        </span>
-                    </div>
-                    <Slider
-                        min={0}
-                        max={values.length - 1}
-                        onChange={handleInputChange}
-                        value={currentStepIndex}
-                    />
+            <div>
+                <div className={styles.range__top}>
+                    <div>{label}</div>
+                    <span id="output" className={styles.range__result}>
+                        <RangeLabel value={value} nouns={nouns} />
+                    </span>
                 </div>
-            ) : (
-                <Skeleton />
-            )}
+                <Slider min={min} max={max} step={step} onChange={onChange} value={value} />
+            </div>
         </div>
     );
 };

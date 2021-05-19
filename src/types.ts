@@ -4,7 +4,11 @@ export type initialStateType = {
     currentCode: string;
     currentTerm: number;
     currentAmount: number;
-    currentRate: number;
+    minDay: number,
+    minSum: number,
+    rate: number,
+    income: number,
+    resultAmount: number,
 }
 
 export type ISumsRate = {
@@ -42,3 +46,11 @@ export type IncomeResultAmountType = {
 };
 
 export type NounsType = string[];
+
+
+
+
+export type RangeDataType = {
+    step: number,
+    max: number
+}

@@ -5,14 +5,8 @@ import DepositAmount from '../DepositAmount';
 import ResultData from '../ResultData';
 import styles from './Calculator.module.css';
 import PdfButton from '../PdfButton/PdfButtonContainer';
-import { IPeriod, ISumsRate } from '../../types';
 
-type CalculatorType = {
-    currentParams: IPeriod[];
-    currentSummsRate: ISumsRate[];
-};
-
-const Calculator: FC<CalculatorType> = ({ currentParams, currentSummsRate }) => {
+const Calculator: FC = () => {
     return (
         <div className={styles.calculator}>
             <header className={styles.calculator__header}>
@@ -20,8 +14,8 @@ const Calculator: FC<CalculatorType> = ({ currentParams, currentSummsRate }) => 
                 <PdfButton />
             </header>
             <DepositSelect />
-            <DepositTerm currentParams={currentParams} />
-            <DepositAmount currentSummsRate={currentSummsRate} />
+            <DepositTerm />
+            <DepositAmount />
             <ResultData />
         </div>
     );

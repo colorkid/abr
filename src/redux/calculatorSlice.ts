@@ -10,7 +10,11 @@ const initialState = {
     currentCode: null as string | null,
     currentTerm: null as number | null,
     currentAmount: null as number | null,
-    currentRate: null as number | null,
+    minDay: null as number | null,
+    minSum: null as number | null,
+    rate: null as number | null,
+    income: null as number | null,
+    resultAmount: null as number | null,
 } as initialStateType;
 
 export const calculatorSlice = createSlice({
@@ -32,8 +36,20 @@ export const calculatorSlice = createSlice({
         setCurrentAmount: (state, action: PayloadAction<number>) => {
             state.currentAmount = action.payload;
         },
-        setCurrentRate: (state, action: PayloadAction<number>) => {
-            state.currentRate = action.payload;
+        setMinDay: (state, action: PayloadAction<number>) => {
+            state.minDay = action.payload;
+        },
+        setMinSum: (state, action: PayloadAction<number>) => {
+            state.minSum = action.payload;
+        },
+        setRate: (state, action: PayloadAction<number>) => {
+            state.rate = action.payload;
+        },
+        setIncome: (state, action: PayloadAction<number>) => {
+            state.income = action.payload;
+        },
+        setResultAmount: (state, action: PayloadAction<number>) => {
+            state.resultAmount = action.payload;
         },
     },
 });
@@ -44,7 +60,11 @@ export const {
     setCurrentCode,
     setCurrentTerm,
     setCurrentAmount,
-    setCurrentRate,
+    setMinDay,
+    setMinSum,
+    setRate,
+    setIncome,
+    setResultAmount
 } = calculatorSlice.actions;
 
 export const fetchDeposits =

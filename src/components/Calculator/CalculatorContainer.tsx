@@ -1,35 +1,38 @@
-import React, { FC, useEffect, useMemo } from 'react';
+import React, { FC, useEffect } from 'react';
 import Calculator from './Calculator';
-import { getDataFromArray } from '../../helpers';
-import { fetchDeposits } from '../../redux/calculatorSlice';
+import {
+    fetchDeposits,
+    setIncome,
+    setMinDay,
+    setMinSum,
+    setRate,
+    setResultAmount,
+} from '../../redux/calculatorSlice';
 import { useAppDispatch, useAppSelector } from '../../redux/store';
-import { IPeriod, ISumsRate } from '../../types';
+import { createData } from '../../helpers';
 
 /* eslint-disable react-hooks/exhaustive-deps */
 const CalculatorContainer: FC = () => {
     const deposits = useAppSelector((state) => state.calculator.deposits);
     const currentCode = useAppSelector((state) => state.calculator.currentCode);
     const currentTerm = useAppSelector((state) => state.calculator.currentTerm);
+    const currentAmount = useAppSelector((state) => state.calculator.currentAmount);
 
     const dispatch = useAppDispatch();
-
-    const currentParams: IPeriod[] = useMemo(
-        () => getDataFromArray(deposits, 'code', currentCode, 'param'),
-        [currentCode]
-    );
-
-    const currentSummsRate: ISumsRate[] = getDataFromArray(
-        currentParams,
-        'period_from',
-        currentTerm,
-        'summs_and_rate'
-    );
 
     useEffect(() => {
         dispatch(fetchDeposits());
     }, []);
 
-    return <Calculator currentParams={currentParams} currentSummsRate={currentSummsRate} />;
+    const results = createData(deposits, currentCode, currentTerm, currentAmount);
+
+    dispatch(setMinDay(results.minDay));
+    dispatch(setMinSum(results.minSum));
+    dispatch(setRate(results.rate));
+    dispatch(setIncome(results.resultSums.income));
+    dispatch(setResultAmount(results.resultSums.resultAmount));
+
+    return <Calculator />;
 };
 
 export default CalculatorContainer;

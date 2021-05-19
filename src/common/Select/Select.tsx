@@ -1,6 +1,5 @@
 import React, { FC } from 'react';
 import Select from 'react-select';
-import Skeleton from '../Skeleton';
 import styles from './Select.module.css';
 import { customStyles } from './customStyle';
 import { getDataFromArray } from '../../helpers';
@@ -17,25 +16,21 @@ const SelectEl: FC<SelectElType> = ({ list, onChange, currentCode }) => {
         onChange(e.value);
     };
 
-    const defaultValue = getDataFromArray(list, 'value', currentCode);
+    const value = getDataFromArray(list, 'value', currentCode);
 
     return (
         <div className={styles.selectWrapper}>
-            {!!list.length && defaultValue ? (
-                <div className={styles.select}>
-                    <Select
-                        // @ts-ignore
-                        styles={customStyles}
-                        className={styles.select__tag}
-                        defaultValue={defaultValue}
-                        onChange={onChangeHandler}
-                        options={list}
-                        isSearchable={false}
-                    />
-                </div>
-            ) : (
-                <Skeleton />
-            )}
+            <div className={styles.select}>
+                <Select
+                    // @ts-ignore
+                    styles={customStyles}
+                    className={styles.select__tag}
+                    value={value}
+                    onChange={onChangeHandler}
+                    options={list}
+                    isSearchable={false}
+                />
+            </div>
         </div>
     );
 };

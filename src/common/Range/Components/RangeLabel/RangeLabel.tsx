@@ -1,30 +1,21 @@
 import { getNoun, numberWithSpace } from '../../../../helpers';
 import React, { FC } from 'react';
 import { NounsType } from '../../../../types';
+import Skeleton from '../../../Skeleton';
+import styles from './RangeLabel.module.css';
 
 type RangeLabelType = {
-    values: number[];
-    currentStepIndex: number;
+    value: number;
     nouns: NounsType;
 };
 
-const RangeLabel: FC<RangeLabelType> = ({ values, currentStepIndex, nouns }) => {
+const RangeLabel: FC<RangeLabelType> = ({ value, nouns }) => {
     const createLabel = () => {
-        const value = numberWithSpace(values[currentStepIndex]);
-
-        if (currentStepIndex === values.length - 1) {
-            return `больше ${value} ${nouns[3]}`;
-        } else if (currentStepIndex === 0 && values.length > 2) {
-            return `${value} ${getNoun(values[currentStepIndex], nouns)}`;
-        } else {
-            return `от ${value} до ${values[currentStepIndex + 1] - 1} ${getNoun(
-                values[currentStepIndex + 1] - 1,
-                nouns
-            )}`;
-        }
+        const valueWithSpace = numberWithSpace(value);
+        return `${valueWithSpace} ${getNoun(value, nouns)}`;
     };
 
-    return <>{createLabel()}</>;
+    return <div className={styles.rangeLabel}>{!!value ? createLabel() : <Skeleton />}</div>;
 };
 
 export default RangeLabel;
