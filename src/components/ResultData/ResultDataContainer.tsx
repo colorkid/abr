@@ -1,12 +1,12 @@
-import React, { memo, useMemo } from 'react';
+import React, { FC, memo, useMemo } from 'react';
 import ResultData from './ResultData';
-import { useSelector } from 'react-redux';
 import { createIncomeResultAmount } from '../../helpers';
+import { useAppSelector } from '../../redux/store';
 
-const ResultDataContainer = () => {
-    const currentRate = useSelector((state) => state.calculator.currentRate);
-    const currentAmount = useSelector((state) => state.calculator.currentAmount);
-    const currentTerm = useSelector((state) => state.calculator.currentTerm);
+const ResultDataContainer: FC = () => {
+    const currentRate = useAppSelector((state) => state.calculator.currentRate);
+    const currentAmount = useAppSelector((state) => state.calculator.currentAmount);
+    const currentTerm = useAppSelector((state) => state.calculator.currentTerm);
 
     const resultSums = useMemo(() => {
         return createIncomeResultAmount(currentAmount, currentRate);

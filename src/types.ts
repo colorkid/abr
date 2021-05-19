@@ -1,3 +1,12 @@
+export type initialStateType = {
+    deposits: DepositsType;
+    depositSelectList: DepositListItemType[];
+    currentCode: string;
+    currentTerm: number;
+    currentAmount: number;
+    currentRate: number;
+}
+
 export type ISumsRate = {
     summ_from: number;
     rate: number;
@@ -27,7 +36,5 @@ export type IncomeResultAmountType = {
     income: number;
     resultAmount: number;
 };
-
-export type DataFromArrayType = string | DepositListItemType | IPeriod | ISumsRate;
 
 export type NounsType = string[];

@@ -1,11 +1,26 @@
-import React from 'react';
+import React, { FC } from 'react';
 import Slider from 'rc-slider';
 import RangeLabel from './Components/RangeLabel';
 import Skeleton from '../Skeleton';
 import styles from './Range.module.css';
 import './Range.css';
+import { NounsType } from '../../types';
 
-const Range = ({ values = [], nouns, handleInputChange, currentStepIndex, label }) => {
+type RangeType = {
+    values: number[];
+    nouns: NounsType;
+    currentStepIndex: number;
+    handleInputChange: (e: number) => void;
+    label: string;
+};
+
+const Range: FC<RangeType> = ({
+    values = [],
+    nouns,
+    handleInputChange,
+    currentStepIndex,
+    label,
+}) => {
     return (
         <div className={styles.range}>
             {values.length ? (

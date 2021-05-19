@@ -5,11 +5,11 @@ import DepositAmount from '../DepositAmount';
 import ResultData from '../ResultData';
 import styles from './Calculator.module.css';
 import PdfButton from '../PdfButton/PdfButtonContainer';
-import { DataFromArrayType } from '../../types';
+import { IPeriod, ISumsRate } from '../../types';
 
 type CalculatorType = {
-    currentParams: DataFromArrayType;
-    currentSummsRate: DataFromArrayType;
+    currentParams: IPeriod[];
+    currentSummsRate: ISumsRate[];
 };
 
 const Calculator: FC<CalculatorType> = ({ currentParams, currentSummsRate }) => {

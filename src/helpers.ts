@@ -1,6 +1,8 @@
-import { DataFromArrayType, IncomeResultAmountType } from './types';
+import { IncomeResultAmountType, NounsType } from './types';
 
-export const getNoun = (number: number, one: string, two: string, five: string): string => {
+export const getNoun = (number: number, nouns: NounsType): string => {
+    const [one, two, five] = nouns;
+
     let n = Math.abs(number);
     n %= 100;
     if (n >= 5 && n <= 20) {
@@ -15,11 +17,6 @@ export const getNoun = (number: number, one: string, two: string, five: string):
     }
 
     return five;
-};
-
-type testt = {
-    currentAmount: null as number | null;
-    currentRate: number;
 };
 
 export const createIncomeResultAmount = (
@@ -39,9 +36,9 @@ export const numberWithSpace = (x: number): string => {
 export const getDataFromArray = (
     arr: any,
     key: string,
-    target: string | null,
-    valueName: string
-): DataFromArrayType => {
+    target: string | number,
+    valueName?: string
+) => {
     if (valueName) {
         return arr?.filter((item: any) => item[key] === target)[0]?.[valueName];
     }

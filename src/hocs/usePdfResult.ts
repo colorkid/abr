@@ -9,7 +9,7 @@ pdfMake.vfs = vfs;
 
 const NOUNS_DAY: NounsType = ['день', 'дня', 'дней'];
 
-export const usePdfResult = (): void => {
+export const usePdfResult = () => {
     const currentCode = useAppSelector((state) => state.calculator.currentCode);
     const currentTerm = useAppSelector((state) => state.calculator.currentTerm);
     const currentRate = useAppSelector((state) => state.calculator.currentRate);
@@ -24,7 +24,7 @@ export const usePdfResult = (): void => {
         content: [
             { text: `Вклад: ${nameDeposit}.`, style: 'row' },
             {
-                text: `Срок вклада: ${currentTerm} ${getNoun(currentTerm, ...NOUNS_DAY)}.`,
+                text: `Срок вклада: ${currentTerm} ${getNoun(currentTerm, NOUNS_DAY)}.`,
                 style: 'row',
             },
             { text: `Процентная ставка: ${currentRate} %.`, style: 'row' },
@@ -32,7 +32,7 @@ export const usePdfResult = (): void => {
             {
                 text: `Сумма через ${currentTerm} ${getNoun(
                     currentTerm,
-                    ...NOUNS_DAY
+                    NOUNS_DAY
                 )}: ${numberWithSpace(resultSums.resultAmount)} рублей.`,
                 style: 'row',
             },

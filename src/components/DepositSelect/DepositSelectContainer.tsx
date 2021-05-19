@@ -1,12 +1,13 @@
-import React, { memo, useEffect } from 'react';
+import React, { FC, memo, useEffect } from 'react';
 import DepositSelect from './DepositSelect';
-import { useDispatch, useSelector } from 'react-redux';
 import { setCurrentCode } from '../../redux/calculatorSlice';
+import { useAppDispatch, useAppSelector } from '../../redux/store';
 
-const DepositSelectContainer = () => {
-    const currentCode = useSelector((state) => state.calculator.currentCode);
-    const depositSelectList = useSelector((state) => state.calculator.depositSelectList);
-    const dispatch = useDispatch();
+/* eslint-disable react-hooks/exhaustive-deps */
+const DepositSelectContainer: FC = () => {
+    const currentCode = useAppSelector((state) => state.calculator.currentCode);
+    const depositSelectList = useAppSelector((state) => state.calculator.depositSelectList);
+    const dispatch = useAppDispatch();
 
     useEffect(() => {
         if (depositSelectList.length) {
@@ -14,7 +15,7 @@ const DepositSelectContainer = () => {
         }
     }, [depositSelectList]);
 
-    const dispatchCurrentDeposit = (value) => {
+    const dispatchCurrentDeposit = (value: string) => {
         dispatch(setCurrentCode(value));
     };
 

@@ -1,12 +1,18 @@
-import React, { useEffect } from 'react';
+import React, { FC, useEffect } from 'react';
 import DepositAmount from './DepositAmount';
-import { useDispatch } from 'react-redux';
 import { setCurrentAmount, setCurrentRate } from '../../redux/calculatorSlice';
+import { ISumsRate } from '../../types';
+import {useAppDispatch} from "../../redux/store";
 
-const DepositAmountContainer = ({ currentSummsRate }) => {
+type DepositAmountContainerType = {
+    currentSummsRate: ISumsRate[];
+};
+
+/* eslint-disable react-hooks/exhaustive-deps */
+const DepositAmountContainer: FC<DepositAmountContainerType> = ({ currentSummsRate }) => {
     const summs = currentSummsRate?.map((item) => item.summ_from);
     const rates = currentSummsRate?.map((item) => item.rate);
-    const dispatch = useDispatch();
+    const dispatch = useAppDispatch();
 
     useEffect(() => {
         if (summs?.length) {
@@ -15,7 +21,7 @@ const DepositAmountContainer = ({ currentSummsRate }) => {
         }
     }, [summs]);
 
-    const dispatchCurrentTerm = (value) => {
+    const dispatchCurrentTerm = (value: number) => {
         dispatch(setCurrentRate(rates[value]));
         dispatch(setCurrentAmount(summs[value]));
     };

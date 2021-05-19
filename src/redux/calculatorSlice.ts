@@ -2,24 +2,15 @@ import { AnyAction, createSlice, PayloadAction, ThunkAction } from '@reduxjs/too
 import { createDepositList } from './helpers';
 import { RootState } from './store';
 import { getDeposits } from '../api';
-import { DepositListItemType, DepositsType } from '../types';
-
-interface initialStateType {
-    deposits: DepositsType;
-    depositSelectList: DepositListItemType[];
-    currentCode: string | null;
-    currentTerm: string | null;
-    currentAmount: number | null;
-    currentRate: number | null;
-}
+import { DepositsType, initialStateType } from '../types';
 
 const initialState = {
     deposits: [],
     depositSelectList: [],
-    currentCode: null,
-    currentTerm: null,
-    currentAmount: null,
-    currentRate: null,
+    currentCode: null as string | null,
+    currentTerm: null as number | null,
+    currentAmount: null as number | null,
+    currentRate: null as number | null,
 } as initialStateType;
 
 export const calculatorSlice = createSlice({
@@ -35,7 +26,7 @@ export const calculatorSlice = createSlice({
         setCurrentCode: (state, action: PayloadAction<string>) => {
             state.currentCode = action.payload;
         },
-        setCurrentTerm: (state, action: PayloadAction<string>) => {
+        setCurrentTerm: (state, action: PayloadAction<number>) => {
             state.currentTerm = action.payload;
         },
         setCurrentAmount: (state, action: PayloadAction<number>) => {

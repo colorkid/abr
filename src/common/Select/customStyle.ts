@@ -1,3 +1,8 @@
+type CustomStylesType = {
+    isFocused: boolean;
+    isSelected: boolean;
+};
+
 export const customStyles = {
     control: () => ({
         display: 'flex',
@@ -14,7 +19,7 @@ export const customStyles = {
     menuList: () => ({
         borderRadius: '3px',
     }),
-    option: (_, { isFocused, isSelected }) => ({
+    option: (_: any, { isFocused, isSelected }: CustomStylesType) => ({
         backgroundColor: isSelected
             ? 'var(--main-accent)'
             : isFocused
