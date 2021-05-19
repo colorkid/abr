@@ -27,6 +27,10 @@ export type DepositItemType = {
 
 export type DepositsType = DepositItemType[];
 
+export type DataJsonType = {
+    deposits: DepositsType
+}
+
 export type DepositListItemType = {
     value: string;
     label: string;

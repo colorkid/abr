@@ -2,7 +2,7 @@ import { AnyAction, createSlice, PayloadAction, ThunkAction } from '@reduxjs/too
 import { createDepositList } from './helpers';
 import { RootState } from './store';
 import { getDeposits } from '../api';
-import { DepositsType, initialStateType } from '../types';
+import { DataJsonType, DepositsType, initialStateType } from '../types';
 
 const initialState = {
     deposits: [],
@@ -49,7 +49,7 @@ export const {
 
 export const fetchDeposits =
     (): ThunkAction<void, RootState, unknown, AnyAction> => async (dispatch) => {
-        const response = await getDeposits();
+        const response = await getDeposits<DataJsonType>('../data.json');
 
         dispatch(loadDeposits(response.deposits));
         dispatch(createDepositSelectList(response.deposits));
